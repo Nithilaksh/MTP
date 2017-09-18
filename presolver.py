@@ -43,5 +43,13 @@ def IPPresolver(nI,nJ,nL,R,D,C,B,a):
 
     IP.solve()
 
+    #for i in range(0,nI):
+        #print(value(x[i]))
+    QoS1=0.0
+    
     for i in range(0,nI):
-        print(value(x[i]))
+        if D[i] != 0:
+            QoS1 = QoS1 + 1 - (value(x[i])/D[i])
+            #print(type(value(x[i])))
+        
+    return QoS1

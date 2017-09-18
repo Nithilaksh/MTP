@@ -13,12 +13,12 @@ import random
 
 
 #Bid Range Matrix
-Bmax=[] 
+#Bmax=[] 
 
-for i in range(0,nI):
-    Bmax.append(float(input("Max Bid of customer " + str(i) + " ")))
+#for i in range(0,nI):
+   # Bmax.append(float(input("Max Bid of customer " + str(i) + " ")))
 
-Bmax = [6,5,5]
+#Bmax = [6,5,5]
     
 #Initial Demand Matrix
 
@@ -27,7 +27,7 @@ Dmax=[]
 for i in range(0,nI):
     Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))
     
-IPPresolver(nI,nJ,nL,R,D,C,B,a)
+#IPPresolver(nI,nJ,nL,R,D,C,B,a)
 
 #Initialize expected demand as 0
 Ed = 0
@@ -40,20 +40,28 @@ epsilon = 0.5
 B = nI*[0] 
 D = nI*[0]
 
-for Ed in arange(0, 6, 0.01):
+for Ed in np.arange(0, 6, 0.01):
     for i in range(0,nI):
-        alph = 1 - (2*Eb)/(Bmax[i]+1)
+        alph = 1 - (2*Ed)/(Dmax[i]+1)
         
         rand = random.uniform(0,1)
         if rand <= alph:
             B[i] = 0
             D[i] = 0
         else:
-            B[i] = np.random.randint(1,Bmax[i]+1)
-            rand2 = np.random.randint(0,2)
-            if rand2 == 0:
-                D[i] = B[i] - epsilon
-            else:
-                D[i] = B[i] + epsilon
+            D[i] = np.random.randint(1,Dmax[i]+1)
+            #rand2 = np.random.randint(0,2)
+            upBoundEb= (1-alph)*(Ed+epsilon)
+            lowBoundEb= (1-alph)*(Ed-epsilon)
+            for Eb in np.arange(lowBoundEb, upBoundEb, 0.01):
+                p = 0.5*((Eb/(1-alph))-Ed + 1)
+                rand2 = random.uniform(0,1)
+                if rand2 <= p:
+                    B[i] = D[i] + epsilon
+                else:
+                    B[i] = D[i] - epsilon
+    QoS1 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
+    print(QoS1)
+        
             
             
