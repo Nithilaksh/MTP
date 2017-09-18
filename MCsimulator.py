@@ -9,7 +9,7 @@ Created on Sun Sep 10 23:05:09 2017
 from NetworkReader import *
 from presolver import *
 import random
-
+import matplotlib.pyplot as plt
 
 
 #Bid Range Matrix
@@ -28,7 +28,7 @@ for i in range(0,nI):
     Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))
     
 #IPPresolver(nI,nJ,nL,R,D,C,B,a)
-
+maxRep =1000
 #Initialize expected demand as 0
 Ed = 0
 #Initialize expected bid as 0
@@ -40,9 +40,11 @@ epsilon = 0.5
 B = nI*[0] 
 D = nI*[0]
 EQoS1 = 0
+MEd =[]
+MQ = []
 
-for Ed in np.arange(0, 6, 0.01):
-    for n in range(0,100):
+for Ed in np.arange(0, 6, 0.1):
+    for n in range(0,maxRep):
         for i in range(0,nI):
             alph = 1 - (2*Ed)/(Dmax[i]+1)
         
@@ -64,9 +66,14 @@ for Ed in np.arange(0, 6, 0.01):
                         B[i] = D[i] - epsilon
         QoS1 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
         EQoS1 += QoS1
-    EQoS1 = EQoS1/100
+    EQoS1 = EQoS1/maxRep
     
-    print(EQoS1)
-        
+    MEd.append(Ed)
+    MQ.append(EQoS1)
+
+    
+plt.scatter(MEd, MQ)
+    
+    
             
             
