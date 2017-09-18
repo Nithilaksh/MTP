@@ -39,29 +39,34 @@ epsilon = 0.5
 #Bid matrix
 B = nI*[0] 
 D = nI*[0]
+EQoS1 = 0
 
 for Ed in np.arange(0, 6, 0.01):
-    for i in range(0,nI):
-        alph = 1 - (2*Ed)/(Dmax[i]+1)
+    for n in range(0,100):
+        for i in range(0,nI):
+            alph = 1 - (2*Ed)/(Dmax[i]+1)
         
-        rand = random.uniform(0,1)
-        if rand <= alph:
-            B[i] = 0
-            D[i] = 0
-        else:
-            D[i] = np.random.randint(1,Dmax[i]+1)
-            #rand2 = np.random.randint(0,2)
-            upBoundEb= (1-alph)*(Ed+epsilon)
-            lowBoundEb= (1-alph)*(Ed-epsilon)
-            for Eb in np.arange(lowBoundEb, upBoundEb, 0.01):
-                p = 0.5*((Eb/(1-alph))-Ed + 1)
-                rand2 = random.uniform(0,1)
-                if rand2 <= p:
-                    B[i] = D[i] + epsilon
-                else:
-                    B[i] = D[i] - epsilon
-    QoS1 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
-    print(QoS1)
+            rand = random.uniform(0,1)
+            if rand <= alph:
+                B[i] = 0
+                D[i] = 0
+            else:
+                D[i] = np.random.randint(1,Dmax[i]+1)
+                #rand2 = np.random.randint(0,2)
+                upBoundEb= (1-alph)*(Ed+epsilon)
+                lowBoundEb= (1-alph)*(Ed-epsilon)
+                for Eb in np.arange(lowBoundEb, upBoundEb, 0.01):
+                    p = 0.5*((Eb/(1-alph))-Ed + 1)
+                    rand2 = random.uniform(0,1)
+                    if rand2 <= p:
+                        B[i] = D[i] + epsilon
+                    else:
+                        B[i] = D[i] - epsilon
+        QoS1 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
+        EQoS1 += QoS1
+    EQoS1 = EQoS1/100
+    
+    print(EQoS1)
         
             
             
