@@ -1,0 +1,18 @@
+#Network Template
+#Number of Customers, nI
+2
+#Number of Links, nL
+1
+#Number of Firms/companies, nJ
+2
+#Routes of Cutomers in order, Link numbers range from 0 to nL-1
+0
+0
+#Firm capacities on links in order of companies(rows) and link capacities(on columns), c_jl
+#If firm does not operate on link, set capacity to zero
+2
+2
+#Operating cost/ cost charged by firm to customer per unit per link a_jl
+1
+2 
+

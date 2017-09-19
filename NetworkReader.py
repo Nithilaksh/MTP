@@ -6,7 +6,7 @@ Created on Sun Sep 10 23:22:10 2017
 @author: nithilaksh
 """
 
-file = open("NetworkTemplate1.txt", "r")
+file = open("TussarNetwork.txt", "r")
 file.readline()
 file.readline()
 

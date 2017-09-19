@@ -50,6 +50,8 @@ def IPPresolver(nI,nJ,nL,R,D,C,B,a):
     for i in range(0,nI):
         if D[i] != 0:
             QoS1 = QoS1 + 1 - (value(x[i])/D[i])
+        else:
+            QoS1 = QoS1 + 1
             #print(type(value(x[i])))
         
     return QoS1

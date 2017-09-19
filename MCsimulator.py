@@ -43,7 +43,7 @@ EQoS1 = 0
 MEd =[]
 MQ = []
 
-for Ed in np.arange(0, 6, 0.1):
+for Ed in np.arange(0, 3, 0.01):
     for n in range(0,maxRep):
         for i in range(0,nI):
             alph = 1 - (2*Ed)/(Dmax[i]+1)
@@ -70,10 +70,7 @@ for Ed in np.arange(0, 6, 0.1):
     
     MEd.append(Ed)
     MQ.append(EQoS1)
+    print(Ed,EQoS1)
 
     
-plt.scatter(MEd, MQ)
-    
-    
-            
-            
+plt.plot(MEd, MQ, MEd, MEd)
