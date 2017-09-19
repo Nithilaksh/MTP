@@ -43,7 +43,7 @@ EQoS1 = 0
 MEd =[]
 MQ = []
 
-for Ed in np.arange(0, 3, 0.01):
+for Ed in np.arange(1, 1.4, 0.001):
     for n in range(0,maxRep):
         for i in range(0,nI):
             alph = 1 - (2*Ed)/(Dmax[i]+1)
@@ -72,5 +72,17 @@ for Ed in np.arange(0, 3, 0.01):
     MQ.append(EQoS1)
     print(Ed,EQoS1)
 
-    
-plt.plot(MEd, MQ, MEd, MEd)
+plt.figure(figsize=(15,15))
+plt.xticks(np.arange(0,3.2,0.2))
+plt.yticks(np.arange(0,3.2,0.2))
+plt.xlabel("Expexted Demand, lambda1", fontsize = 16)
+plt.ylabel("Expected QoS1", fontsize = 16)
+plt.ylim(0, 2.2)
+plt.xlim(0, 3)
+plt.legend(loc = 'upper right')
+plt.plot(MEd, MQ, color = "blue", label = "QoS1 v/s lambda1")
+plt.plot(MEd, MEd, color = "orange", label = "lambda1 = QoS1 line")
+plt.plot(len(MEd)*[1.134],MEd)
+
+#for i  in range(0,len(MEd)):
+ #   print(MEd[i],MQ[i])
