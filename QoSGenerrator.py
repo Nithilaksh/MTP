@@ -7,36 +7,37 @@ Created on Wed Sep 20 01:26:32 2017
 """
 
 #QoS Generator and Storing
+#use itertools.product(listof lists)
 from NetworkReader import *
+from presolver import *
+import itertools
 
 D = nI*[0]
 B = nI*[0]
 
-Dmax=[]
+B = [[1,0],[3,4,5],[5,6,7]]
 
-#for i in range(0,nI):
- #   Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))
+'''
+for i in range(1,19):
+    dummy =[]
+    for j in range(0, len(B)):
+        k = int(np.floor((i%((j+1)*len(B[j])))/(j+1)))
+        dummy.append(B[j][k])
+    print(dummy)
+'''
 
-Dmax = [1,1]
+listOlists = []
+for i in range(0,nI):
+    listOlists.append(np.arange(0,Dmax[i]+1))
 
 for i in range(0,nI):
-    for j in range(0,int(Dmax[i]+1)):
-        D[i] = j
-        #B = nI*[0]
-        for k in range(0, nI): 
-            
-            for l in np.arange(0,Dmax[i]+1):
-                B[k] = l
-                #print(D,B)
-            B[k] = 0
+    listOlists.append(np.arange(0,Dmax[i]+1,0.5))
+    
+bidDemandCombs = list(itertools.product(*listOlists))
 
-B = nI*[0]
+for i in range(0, len(bidDemandCombs)):
+    QoS1,QoS2 = IPPresolver(nI,nJ,nL,R,bidDemandCombs[i][0:nI],C,bidDemandCombs[i][nI:2*nI],a)
 
-for i in range(0,2):
-    for j in range(0,2):
-        for k in range(0,2):
-            B[j] = k
-            print(B)
-        B[j] = 0
-    #
-    #B[i] = 0
+print(QoS1,QoS2)
+
+    #print (B[0][i%2],B[1][int(np.floor((i%6)/2))],B[2][int(np.floor((i%9)/3))])

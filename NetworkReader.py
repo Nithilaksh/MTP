@@ -53,3 +53,18 @@ for i in range(0,nJ):
     data = line.split()
     for j in range(0,len(data)):
         a[i].append(float(data[j]))
+        
+#Bid Range Matrix
+#Bmax=[] 
+
+#for i in range(0,nI):
+   # Bmax.append(float(input("Max Bid of customer " + str(i) + " ")))
+
+#Bmax = [6,5,5]
+    
+#Initial Demand Matrix
+
+Dmax=[]
+
+for i in range(0,nI):
+    Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))

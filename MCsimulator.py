@@ -12,23 +12,11 @@ import random
 import matplotlib.pyplot as plt
 
 
-#Bid Range Matrix
-#Bmax=[] 
 
-#for i in range(0,nI):
-   # Bmax.append(float(input("Max Bid of customer " + str(i) + " ")))
-
-#Bmax = [6,5,5]
-    
-#Initial Demand Matrix
-
-Dmax=[]
-
-for i in range(0,nI):
-    Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))
     
 #IPPresolver(nI,nJ,nL,R,D,C,B,a)
-maxRep =1000
+maxRep =100
+refinement = 0.1
 #Initialize expected demand as 0
 Ed = 0
 #Initialize expected bid as 0
@@ -40,10 +28,11 @@ epsilon = 0.5
 B = nI*[0] 
 D = nI*[0]
 EQoS1 = 0
+EQoS2 = 0
 MEd =[]
 MQ = []
 
-for Ed in np.arange(1, 1.4, 0.001):
+for Ed in np.arange(0, max(Dmax), refinement):
     for n in range(0,maxRep):
         for i in range(0,nI):
             alph = 1 - (2*Ed)/(Dmax[i]+1)
@@ -64,13 +53,15 @@ for Ed in np.arange(1, 1.4, 0.001):
                         B[i] = D[i] + epsilon
                     else:
                         B[i] = D[i] - epsilon
-        QoS1 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
+        QoS1, QoS2 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
         EQoS1 += QoS1
+        EQoS2 += QoS2
     EQoS1 = EQoS1/maxRep
+    EQoS2 = EQoS2/maxRep
     
     MEd.append(Ed)
-    MQ.append(EQoS1)
-    print(Ed,EQoS1)
+    MQ.append(EQoS2)
+    print(Ed,EQoS2)
 
 plt.figure(figsize=(15,15))
 plt.xticks(np.arange(0,3.2,0.2))
