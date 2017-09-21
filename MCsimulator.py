@@ -6,8 +6,9 @@ Created on Sun Sep 10 23:05:09 2017
 @author: nithilaksh
 """
 
-from NetworkReader import *
+#from NetworkReader import *
 from presolver import *
+from QoSGenerrator import *
 import random
 import matplotlib.pyplot as plt
 
@@ -15,7 +16,7 @@ import matplotlib.pyplot as plt
 
     
 #IPPresolver(nI,nJ,nL,R,D,C,B,a)
-maxRep =100
+maxRep =1000
 refinement = 0.05
 #Initialize expected demand as 0
 Ed = 0
@@ -54,7 +55,8 @@ for Ed in np.arange(0, max(Dmax), refinement):
                         B[i] = D[i] + epsilon
                     else:
                         B[i] = D[i] - epsilon
-        QoS1, QoS2 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
+        #QoS1, QoS2 = IPPresolver(nI,nJ,nL,R,D,C,B,a)
+        (QoS1, QoS2) = QoSdict[tuple(D+B)]
         EQoS1 += QoS1
         EQoS2 += QoS2
     EQoS1 = EQoS1/maxRep

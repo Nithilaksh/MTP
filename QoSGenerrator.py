@@ -40,6 +40,6 @@ for i in range(0, len(bidDemandCombs)):
     dummyDict = {tuple(bidDemandCombs[i]) : [QoS1,QoS2]}
     QoSdict.update(dummyDict)
 
-print(QoSdict)
+#print(QoSdict)
 
     #print (B[0][i%2],B[1][int(np.floor((i%6)/2))],B[2][int(np.floor((i%9)/3))])
