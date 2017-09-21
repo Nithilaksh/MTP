@@ -25,7 +25,7 @@ for i in range(1,19):
         dummy.append(B[j][k])
     print(dummy)
 '''
-
+QoSdict = {}
 listOlists = []
 for i in range(0,nI):
     listOlists.append(np.arange(0,Dmax[i]+1))
@@ -37,7 +37,9 @@ bidDemandCombs = list(itertools.product(*listOlists))
 
 for i in range(0, len(bidDemandCombs)):
     QoS1,QoS2 = IPPresolver(nI,nJ,nL,R,bidDemandCombs[i][0:nI],C,bidDemandCombs[i][nI:2*nI],a)
+    dummyDict = {tuple(bidDemandCombs[i]) : [QoS1,QoS2]}
+    QoSdict.update(dummyDict)
 
-print(QoS1,QoS2)
+print(QoSdict)
 
     #print (B[0][i%2],B[1][int(np.floor((i%6)/2))],B[2][int(np.floor((i%9)/3))])

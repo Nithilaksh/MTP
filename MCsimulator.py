@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
     
 #IPPresolver(nI,nJ,nL,R,D,C,B,a)
 maxRep =100
-refinement = 0.1
+refinement = 0.05
 #Initialize expected demand as 0
 Ed = 0
 #Initialize expected bid as 0
@@ -30,7 +30,8 @@ D = nI*[0]
 EQoS1 = 0
 EQoS2 = 0
 MEd =[]
-MQ = []
+MQoS1 = []
+MQoS2 = []
 
 for Ed in np.arange(0, max(Dmax), refinement):
     for n in range(0,maxRep):
@@ -60,10 +61,11 @@ for Ed in np.arange(0, max(Dmax), refinement):
     EQoS2 = EQoS2/maxRep
     
     MEd.append(Ed)
-    MQ.append(EQoS2)
-    print(Ed,EQoS2)
+    MQoS1.append(EQoS1)
+    MQoS2.append(EQoS2)
+    print(Ed,EQoS1,EQoS2)
 
-plt.figure(figsize=(15,15))
+plt.figure(figsize=(10,10))
 plt.xticks(np.arange(0,3.2,0.2))
 plt.yticks(np.arange(0,3.2,0.2))
 plt.xlabel("Expexted Demand, lambda1", fontsize = 16)
@@ -71,7 +73,8 @@ plt.ylabel("Expected QoS1", fontsize = 16)
 plt.ylim(0, 2.2)
 plt.xlim(0, 3)
 plt.legend(loc = 'upper right')
-plt.plot(MEd, MQ, color = "blue", label = "QoS1 v/s lambda1")
+plt.plot(MEd, MQoS1, color = "blue", label = "QoS1 v/s lambda1")
+plt.plot(MEd, MQoS2, color = "green", label = "QoS1 v/s lambda1")
 plt.plot(MEd, MEd, color = "orange", label = "lambda1 = QoS1 line")
 plt.plot(len(MEd)*[1.134],MEd)
 
