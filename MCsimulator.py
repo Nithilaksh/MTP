@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
     
 #IPPresolver(nI,nJ,nL,R,D,C,B,a)
 maxRep =1000
-refinement = 0.05
+refinement = 0.1
 #Initialize expected demand as 0
 Ed = 0
 #Initialize expected bid as 0
@@ -48,7 +48,7 @@ for Ed in np.arange(0, max(Dmax), refinement):
                 #rand2 = np.random.randint(0,2)
                 upBoundEb= (1-alph)*(Ed+epsilon)
                 lowBoundEb= (1-alph)*(Ed-epsilon)
-                for Eb in np.arange(lowBoundEb, upBoundEb, 0.01):
+                for Eb in np.arange(lowBoundEb, upBoundEb, refinement):
                     p = 0.5*((Eb/(1-alph))-Ed + 1)
                     rand2 = random.uniform(0,1)
                     if rand2 <= p:
@@ -74,10 +74,10 @@ plt.xlabel("Expexted Demand, lambda1", fontsize = 16)
 plt.ylabel("Expected QoS1", fontsize = 16)
 plt.ylim(0, 2.2)
 plt.xlim(0, 3)
-plt.legend(loc = 'upper right')
 plt.plot(MEd, MQoS1, color = "blue", label = "QoS1 v/s lambda1")
-plt.plot(MEd, MQoS2, color = "green", label = "QoS1 v/s lambda1")
+plt.plot(MEd, MQoS2, color = "green", label = "QoS2 v/s lambda1")
 plt.plot(MEd, MEd, color = "orange", label = "lambda1 = QoS1 line")
+plt.legend(loc = 'upper right')
 plt.plot(len(MEd)*[1.134],MEd)
 
 #for i  in range(0,len(MEd)):
