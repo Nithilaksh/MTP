@@ -6,7 +6,7 @@ Created on Sun Sep 10 23:22:10 2017
 @author: nithilaksh
 """
 
-file = open("NetworkTemplate1.txt", "r")
+file = open("TussarNetwork.txt", "r")
 file.readline()
 file.readline()
 
@@ -64,9 +64,7 @@ for i in range(0,nJ):
     
 #Initial Demand Matrix
 
-Dmax=[20,4,15]
+Dmax=[]
 
-#for i in range(0,nI):
- #   Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))
-    
-    
+for i in range(0,nI):
+    Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))

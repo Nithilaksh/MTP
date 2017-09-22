@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Sep 20 01:26:32 2017
+Created on Fri Sep 22 19:46:50 2017
 
 @author: nithilaksh
 """
 
-#QoS Generator and Storing
-#use itertools.product(listof lists)
 from NetworkReader import *
 from presolver import *
 import itertools
+import pickle
 
 #D = nI*[0]
 #B = nI*[0]
@@ -30,7 +29,9 @@ totalIters = 1
 for i in range(0,2*nI):
     totalIters = totalIters * len(listOlists[i])
 
-for i in range(1,totalIters+1):
+itersDiv = totalIters/4
+
+for i in range(1, int(itersDiv)+1):
     dummy =[]
     for j in range(0, len(listOlists)):
         k = int(np.floor((i%((j+1)*len(listOlists[j])))/(j+1)))
@@ -40,15 +41,6 @@ for i in range(1,totalIters+1):
     print(i)
     QoSdict.update(dummyDict)
 
-
-'''    
-bidDemandCombs = list(itertools.product(*listOlists))
-
-for i in range(0, len(bidDemandCombs)):
-    QoS1,QoS2 = IPPresolver(nI,nJ,nL,R,bidDemandCombs[i][0:nI],C,bidDemandCombs[i][nI:2*nI],a)
-    dummyDict = {tuple(bidDemandCombs[i]) : [QoS1,QoS2]}
-    QoSdict.update(dummyDict)
-'''
-#print(QoSdict)
-
-    #print (B[0][i%2],B[1][int(np.floor((i%6)/2))],B[2][int(np.floor((i%9)/3))])
+output = open("Y_data1.pkl", 'wb')
+pickle.dump(QoSdict, output)
+output.close()
