@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+Created on Sat Sep 23 05:13:32 2017
+
+@author: nithilaksh
+"""
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
 Created on Sun Sep 10 23:22:10 2017
 
 @author: nithilaksh
 """
 
-file = open("TussarNetwork.txt", "r")
+file = open("NetworkTemplate1.txt", "r")
 file.readline()
 file.readline()
 
@@ -64,7 +72,7 @@ for i in range(0,nJ):
     
 #Initial Demand Matrix
 
-Dmax=[3,3]
+Dmax=[20,4,15]
 
 #for i in range(0,nI):
  #   Dmax.append(float(input("Initial Demand of Customer " + str(i) + " ")))
